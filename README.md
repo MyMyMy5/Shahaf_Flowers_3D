@@ -2,6 +2,8 @@
 
 A personal, animated love letter for Shahaf: blooming flowers, a candlelit table for two, and a soundtrack.
 
+The seven-chapter film runs for 1 minute 52 seconds. Its later chapters focus on caring for the relationship and looking forward to a future together.
+
 ## Open the experience
 
 Open `somewhere-just-us.html` in a modern browser, then select **Open when you're ready**. No installation or build step is needed.
