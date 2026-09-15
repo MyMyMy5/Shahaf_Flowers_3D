@@ -606,12 +606,26 @@ function updateWorld(){
 // Articulated butterfly wings follow an actual 3D flight path.
 const butterflies=[];
 function buildButterflies(){
- for(let i=0;i<3;i++){
+ for(let i=0;i<6;i++){
   const wings=[];for(const side of[-1,1]){const b=new Builder();b.add(sphere(14,10),pose(side*.20,.11,0,.24,.175,.012,0,0,side*.28),i%2?'#edb9ca':'#f5d59d',.11);b.add(sphere(12,8),pose(side*.15,-.115,0,.16,.14,.013,0,0,side*-.32),i%2?'#a191c5':'#d49387',.08);b.add(sphere(10,6),pose(side*.24,.135,.012,.12,.09,.007),'#fff0d0',.25);wings.push(mesh(b));}
-  const body=new Builder();body.add(sphere(8,6),pose(0,0,0,.018,.16,.023),'#675641');body.tube([0,.11,0],[.055,.24,0],.006,'#c6a26a');body.tube([0,.11,0],[-.055,.24,0],.006,'#c6a26a');butterflies.push({wings,body:mesh(body),phase:i*TAU/3});
+  const body=new Builder();body.add(sphere(8,6),pose(0,0,0,.018,.16,.023),'#675641');body.tube([0,.11,0],[.055,.24,0],.006,'#c6a26a');body.tube([0,.11,0],[-.055,.24,0],.006,'#c6a26a');butterflies.push({wings,body:mesh(body),phase:i<3?i*TAU/3:(i-3)*TAU/3+TAU/6,opening:i>=3,arrival:(i-3)*.35});
  }
 }
-function updateButterflies(){for(const b of butterflies){const fade=between(story,7,11);const t=clock*.48+b.phase;const garden=between(story,16,27);const x=mix(HERO[0]+Math.sin(t)*1.7,Math.sin(t*.6)*5.5,garden),y=3.05+Math.sin(t*1.2)*.6,z=mix(HERO[2]+Math.cos(t)*.9,.5+Math.cos(t)*2.9,garden);const root=pose(x,y,z,.62,.62,.62,.12*Math.sin(t),.25*Math.sin(t*2),Math.sin(t*.8)*.2);b.body.alpha=fade;b.body.model=root;b.wings.forEach((m,i)=>{m.alpha=fade;m.model=M.mul(root,M.ry((i?1:-1)*Math.sin(clock*11+b.phase)*1.0))});}}
+function updateButterflies(){for(const b of butterflies){
+ let fade,t,x,y,z,scale=.62;
+ if(b.opening){
+  // A smaller trio arrives with the stem and gently leaves as the garden opens.
+  fade=reduced.matches?0:between(story,2.0+b.arrival,3.5+b.arrival)*(1-between(story,10.5,13.5));
+  t=clock*.64+b.phase;const growth=between(story,1.2,4.5);
+  x=HERO[0]+Math.sin(t)*(1.25+.18*Math.sin(t*.6));
+  y=.48+growth*2.05+Math.sin(t*1.3)*.32;
+  z=HERO[2]+Math.cos(t)*(.8+.10*Math.sin(t));scale=.40+b.arrival*.06;
+ }else{
+  fade=between(story,7,11);t=clock*.48+b.phase;const garden=between(story,16,27);
+  x=mix(HERO[0]+Math.sin(t)*1.7,Math.sin(t*.6)*5.5,garden);y=3.05+Math.sin(t*1.2)*.6;z=mix(HERO[2]+Math.cos(t)*.9,.5+Math.cos(t)*2.9,garden);
+ }
+ const root=pose(x,y,z,scale,scale,scale,.12*Math.sin(t),.25*Math.sin(t*2),Math.sin(t*.8)*.2);b.body.alpha=fade;b.body.model=root;b.wings.forEach((m,i)=>{m.alpha=fade;m.model=M.mul(root,M.ry((i?1:-1)*Math.sin(clock*11+b.phase)*1.0))});
+}}
 
 const chapters=[
  {at:0,end:11,title:'a little love letter'},
@@ -684,7 +698,7 @@ function addBloomParticles(point){
  };
  if(story<11.5){
   const lift=between(story,1.5,2.7)*(1-between(story,6.4,8.5));
-  const count=mobile?72:128;
+  const count=mobile?96:176;
   // Two fine trails wind up the growing stem, with occasional four-point glints.
   if(lift>.005)for(let j=0;j<count;j++){
    const u=j/(count-1),strand=j%2,a=u*TAU*2.2-clock*1.55+strand*Math.PI;
@@ -698,13 +712,13 @@ function addBloomParticles(point){
    const age=story-(hero[4]+3.1+wave*1.25),life=4.2;
    if(age<=0||age>=life)continue;
    const t=age/life,r=.24+ease(t)*1.75,alpha=Math.sin(t*Math.PI)**1.4*.62;
-   const n=mobile?32:56;
+   const n=mobile?44:72;
    for(let j=0;j<n;j++){
     const a=j/n*TAU+wave*.34+age*.18,scatter=bloomHash(j+wave*90);
     emit(center[0]+Math.cos(a)*r,center[1]+.16+Math.sin(a)*r*.24+t*.35,center[2]+Math.sin(a)*r*.88,j%13===0?17:6+scatter*5,bloomColors[(j+wave)%3],alpha*(.55+.45*scatter),j%13===0?1:0,a);
    }
   }
-  const n=mobile?34:64;
+  const n=mobile?46:88;
   for(let j=0;j<n;j++){
    const seed=bloomHash(j+200),age=story-(4.1+seed*2.1),life=3.3+bloomHash(j+400)*1.8;
    if(age<=0||age>=life)continue;
@@ -822,7 +836,7 @@ function frame(now){
 }
 function dispose(){cancelAnimationFrame(frameId);frameId=0;clearTimeout(toastTimer);clearTimeout(resizeTimer);audioPlayId++;music.pause();for(const m of meshes)gl.deleteBuffer(m.buffer);for(const b of flowerBatches){gl.deleteBuffer(b.buffer);gl.deleteBuffer(b.ib)}for(const t of textures)gl.deleteTexture(t);for(const t of targets){gl.deleteFramebuffer(t.f);gl.deleteTexture(t.t);if(t.d)gl.deleteRenderbuffer(t.d)}for(const p of[mainProgram,flowerProgram,skyProgram,pointProgram,blurProgram,compositeProgram])if(p)gl.deleteProgram(p.p);gl.deleteBuffer(pointBuffer);gl.deleteBuffer(screenBuffer);}
 window.addEventListener('pagehide',event=>{if(!event.persisted)dispose()});
-if(testMode){window.__ONLY_US__={seek(t){if(!started)startFilm();story=clamp(Number(t),0,62);clock=story;finished=story>=62;setPaused(true);captionKey='';updateCamera();updateWorld();updateCaption();renderWorld();drawAtmosphere();dirty=false;return this.state()},play(){if(!started)startFilm();setPaused(false)},pause(){setPaused(true)},state(){return{started,paused,finished,story,clock,frameCount,flowers:flowerInstances.length,meshes:meshes.length,particles:particleCount,bloomParticles:bloomParticleCount,glError:gl.getError(),instancing:!!instancing,camera:eye.slice(),viewport:[W,H],renderer:gl.getParameter(gl.RENDERER)}}};}
+if(testMode){window.__ONLY_US__={seek(t){if(!started)startFilm();story=clamp(Number(t),0,62);clock=story;finished=story>=62;setPaused(true);captionKey='';updateCamera();updateWorld();updateCaption();renderWorld();drawAtmosphere();dirty=false;return this.state()},play(){if(!started)startFilm();setPaused(false)},pause(){setPaused(true)},state(){return{started,paused,finished,story,clock,frameCount,flowers:flowerInstances.length,meshes:meshes.length,particles:particleCount,bloomParticles:bloomParticleCount,visibleButterflies:butterflies.filter(b=>b.body.alpha>.005).length,openingButterflies:butterflies.filter(b=>b.opening&&b.body.alpha>.005).length,glError:gl.getError(),instancing:!!instancing,camera:eye.slice(),viewport:[W,H],renderer:gl.getParameter(gl.RENDERER)}}};}
 try{initRenderer();resize();resizeFX();buildWorld();applyNames();$('loading').classList.add('ready');frameId=requestAnimationFrame(frame);if(testMode&&params.has('at')){window.__ONLY_US__.seek(Number(params.get('at')));}}
 catch(error){console.error('Garden initialization failed:',error);$('loading').classList.add('ready');$('error').hidden=false;}
 })();
