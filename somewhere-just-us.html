@@ -23,6 +23,11 @@ dialog{color:var(--cream);background:#201b29ed;border:1px solid #bba09845;border
 
 #caption-subtitle{overflow-wrap:anywhere}.cover-copy{max-width:90%}
 #caption-title,#caption-subtitle{text-shadow:0 1px 3px #070710,0 2px 12px #070710}
+#experience.orbit-enabled{touch-action:none;cursor:ew-resize}
+#orbit-hint{margin:10px 0 0;font-size:11px;line-height:1.5;color:#dfc9bd;text-shadow:0 1px 4px #100c19;pointer-events:none}
+.touch-hint{display:none}
+@media(pointer:coarse){.mouse-hint{display:none}.touch-hint{display:inline}}
+@media(max-width:800px){.ending .replay-button{margin:auto}#orbit-hint{text-align:center;font-size:10px}}
 /* Keep optional long names from pushing the player controls off screen. */
 .cover-copy p,#caption-kicker{overflow-wrap:anywhere}
 .tiny-signature{width:240px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -48,7 +53,7 @@ dialog{color:var(--cream);background:#201b29ed;border:1px solid #bba09845;border
     <p id="reduced-note" hidden>Gentle mode is on. Play to watch the animation.</p>
   </section>
   <section id="caption" class="caption" aria-live="polite" aria-atomic="true"><span id="caption-kicker" class="eyebrow"></span><h2 id="caption-title"></h2><p id="caption-subtitle"></p></section>
-  <div id="ending" class="ending" hidden><button id="again" class="replay-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg>One more time</button></div>
+  <div id="ending" class="ending" hidden><button id="again" class="replay-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg>One more time</button><p id="orbit-hint"><span class="mouse-hint">Move your mouse to look around</span><span class="touch-hint">Drag left or right to look around</span></p></div>
   <footer id="transport" class="transport initially-hidden">
     <div class="scene-label"><span id="chapter-number">01</span><span class="slash">/</span><span>05</span><span id="chapter-title">a little love letter</span></div>
     <nav id="chapters" aria-label="Animation chapters"></nav>
@@ -101,6 +106,16 @@ const testMode=params.get('test')==='1';
 let started=false,paused=false,finished=false,story=0,clock=0,last=0,frameId=0,frameCount=0;
 let W=innerWidth,H=innerHeight,DPR=1,visible=!document.hidden,dirty=true,contextLost=false;
 let pointer={x:0,y:0,tx:0,ty:0};
+const endingOrbit={angle:0,target:0,pointerId:null,startX:0,startTarget:0},orbitLimit=.16;
+const canOrbit=()=>started&&story>=60;
+function releaseOrbitDrag(){const id=endingOrbit.pointerId;endingOrbit.pointerId=null;if(id!==null&&$('experience').hasPointerCapture(id))$('experience').releasePointerCapture(id);}
+function resetEndingOrbit(){releaseOrbitDrag();endingOrbit.angle=endingOrbit.target=0;$('experience').classList.remove('orbit-enabled');}
+function tickEndingOrbit(dt){
+ if(!canOrbit()){if(endingOrbit.angle||endingOrbit.target||endingOrbit.pointerId!==null)resetEndingOrbit();return;}
+ let next=mix(endingOrbit.angle,endingOrbit.target,reduced.matches?1:1-Math.exp(-dt*7));
+ if(Math.abs(next-endingOrbit.target)<.0001)next=endingOrbit.target;
+ if(next!==endingOrbit.angle){endingOrbit.angle=next;dirty=true;}
+}
 let toastTimer=0;
 function toast(text){$('toast').textContent=text;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3200)}
 
@@ -384,7 +399,7 @@ function renderWorld(){
  gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,targetW,targetH);screen(compositeProgram);gl.uniform1f(compositeProgram.u.uTime,clock);gl.uniform1i(compositeProgram.u.uTexture,0);gl.uniform1i(compositeProgram.u.uBloom,1);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,targets[0].t);gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,targets[2].t);gl.drawArrays(gl.TRIANGLES,0,6);gl.activeTexture(gl.TEXTURE0);
 }
 
-const flowerBatches=[],flowerInstances=[],headParts=[];
+const flowerBatches=[],flowerInstances=[],headParts=[],pathRoseInstances=[];
 const HERO=[-2.6,0,6.6];
 const groundY=(x,z)=>-.12+Math.max(0,(Math.hypot(x,z+1)-4)/10)*(.1*Math.sin(x*.7)+.08*Math.cos(z*.8));
 function botanicalGeometry(detail=1){
@@ -437,6 +452,41 @@ function buildFlowers(){
  }
  for(const[x,z,sc]of[[-5.2,5.6,1.13],[4.9,5.5,1.06],[-7.3,3.9,.96],[6.8,3.8,1.],[-4.8,9.3,.83],[4.7,9.4,.89],[-4.7,-4.7,.80],[4.7,-4.7,.88]])instances.push([x,groundY(x,z),z,sc,12+rand()*1.5,rand()*TAU,rand(),x>0?-.26:.2]);
  flowerBatch(regular,instances);
+}
+function roseGeometry(){
+ const data=[],height=1.8;
+ function pack(open,closed,kind,delay,tint,emission=0){
+  for(const i of open.ix){const col=typeof tint==='function'?tint(open.uv[i*2],open.uv[i*2+1]):color(tint);data.push(...open.p.slice(i*3,i*3+3),...open.n.slice(i*3,i*3+3),...col,emission,...open.uv.slice(i*2,i*2+2),kind,delay,0,...closed.p.slice(i*3,i*3+3));}
+ }
+ const stem=surface((u,v)=>[.035*Math.sin(v*4)+.025*Math.cos(u*TAU),height*v,.025*Math.sin(u*TAU)],6,8);
+ pack(stem,stem,0,0,'#326b3c');
+ for(let j=0;j<3;j++){
+  const y=.40+j*.36,side=j%2?1:-1;
+  const open=surface((u,v)=>[side*.48*v,y+.22*Math.sin(v*2.4),.18*Math.sin(v*Math.PI)*(u*2-1)],4,6);
+  const closed=surface((u,v)=>[side*.025*v,y+.33*v,.012*(u*2-1)],4,6);
+  pack(open,closed,1,j*.12,'#3e7d47');
+ }
+ // Overlapping, cupped petals curl into a tight spiral at the center.
+ const rings=[[7,.66,.38,.37],[6,.47,.32,.49],[5,.29,.25,.59],[3,.14,.18,.66]];
+ for(let ring=0;ring<rings.length;ring++){
+  const[count,length,width,rise]=rings[ring];
+  for(let j=0;j<count;j++){
+   const angle=j/count*TAU+ring*.73,c=Math.cos(angle),s=Math.sin(angle);
+   const open=surface((u,v)=>{const w=width*Math.sin(v*Math.PI)* (u*2-1),r=.035+length*Math.sin(v*Math.PI*.72);const y=height+rise*v+.09*(u*2-1)**2*Math.sin(v*Math.PI)-.10*v*v;return[s*r+c*w,y,c*r-s*w]},6,9);
+   const closed=surface((u,v)=>{const r=.04+.07*Math.sin(v*Math.PI),w=width*.12*Math.sin(v*Math.PI)*(u*2-1);return[s*r+c*w,height+.72*v,c*r-s*w]},6,9);
+   pack(open,closed,2,ring*.17+(j%2)*.045,(u,v)=>[.57+.33*v,.025+.055*v,.065+.085*v],.025);
+  }
+ }
+ return{data:new Float32Array(data),count:data.length/18};
+}
+function buildPathRoses(){
+ // Follow the exposed walkway, keeping stems outside the stone edges.
+ for(let i=0;i<12;i++)for(const side of[-1,1]){
+  const z=3.45+i*.70+side*.08,x=Math.sin(z*.27)*.45+side*(1.04+.025*Math.sin(i*1.7));
+  const scale=.30+.035*bloomHash(i*13+side+90),start=42+i*.20+(side>0?.10:0);
+  pathRoseInstances.push([x,groundY(x,z),z,scale,start,bloomHash(i*19+side+120)*TAU,.12,side*.16]);
+ }
+ flowerBatch(roseGeometry(),pathRoseInstances);
 }
 function drawFlowers(){
  gl.useProgram(flowerProgram.p);sharedLight(flowerProgram);gl.uniform1f(flowerProgram.u.uBotanical,1);gl.uniform1f(flowerProgram.u.uStory,story);gl.disable(gl.BLEND);
@@ -595,7 +645,7 @@ function buildLanterns(){
  b.add(geo,M.identity(),'#efba80',.55);b.add(torus(.18,.014,TAU,20),pose(0,0,0,1,1,1,Math.PI/2),'#9e7444');b.add(torus(.19,.010,TAU,20),pose(0,.45,0,1,1,1,Math.PI/2),'#e0bd84');
  for(let i=0;i<16;i++){const m=mesh(b);m.alpha=0;lanterns.push({m,x:range(-11,11),z:range(-7,5),speed:range(.35,.62),phase:range(0,12),scale:range(.55,1.05)})}
 }
-function buildWorld(){buildGround();buildFlowers();buildCafe();for(const p of flames)flameMeshes.push(buildFireFlames());buildLanterns();buildButterflies()}
+function buildWorld(){buildGround();buildFlowers();buildCafe();for(const p of flames)flameMeshes.push(buildFireFlames());buildLanterns();buildButterflies();buildPathRoses()}
 function updateWorld(){
  updateButterflies();
  for(const p of sceneParts){const g=between(story,p.start,p.start+p.duration);p.mesh.alpha=g;if(p.fadeOnly){p.mesh.model=M.identity();continue;}p.mesh.model=pose(p.base[0],p.base[1]-(1-g)*.55,p.base[2],mix(.92,1,g),Math.max(.001,g),mix(.92,1,g));}
@@ -651,9 +701,11 @@ const cameraKeys=[
 function catmull(p0,p1,p2,p3,t){return p1.map((v,i)=>.5*((2*v)+(-p0[i]+p2[i])*t+(2*p0[i]-5*v+4*p2[i]-p3[i])*t*t+(-p0[i]+3*v-3*p2[i]+p3[i])*t*t*t))}
 function cameraAt(t){let j=0;while(j<cameraKeys.length-2&&t>cameraKeys[j+1][0])j++;const p1=cameraKeys[j],p2=cameraKeys[j+1],p0=cameraKeys[Math.max(0,j-1)],p3=cameraKeys[Math.min(cameraKeys.length-1,j+2)];const s=clamp((t-p1[0])/(p2[0]-p1[0]));return[catmull(p0[1],p1[1],p2[1],p3[1],s),catmull(p0[2],p1[2],p2[2],p3[2],s)]}
 function updateCamera(){
+ if(!canOrbit()&&(endingOrbit.angle||endingOrbit.target||endingOrbit.pointerId!==null))resetEndingOrbit();
  [eye,at]=cameraAt(started?story:0);
  if(W/H<1.0){const narrow=smooth((1.05-W/H)/.60);if(story>48)at[0]=mix(at[0],0,narrow);const factor=mix(1,mix(1.62,1.38,between(story,47,58)),narrow)*mix(.86,1,between(story,11,26));eye=at.map((v,i)=>v+(eye[i]-v)*factor);}
  if(!paused&&!reduced.matches){eye[0]+=pointer.x*.22;eye[1]-=pointer.y*.13;if(story>=60){eye[0]+=Math.sin(clock*.11)*.45;eye[2]+=Math.cos(clock*.13)*.25;}}
+ if(canOrbit()&&endingOrbit.angle){const x=eye[0]-at[0],z=eye[2]-at[2],c=Math.cos(endingOrbit.angle),s=Math.sin(endingOrbit.angle);eye[0]=at[0]+x*c+z*s;eye[2]=at[2]+z*c-x*s;}
  vp=M.mul(M.perspective(42*Math.PI/180,W/H,.1,100),M.lookAt(eye,at));
  warmth=between(story,9,20)*(1-between(story,35,48));night=between(story,37,50);
 }
@@ -672,6 +724,7 @@ function updateCaption(){
  $('chapter-number').textContent=String(current+1).padStart(2,'0');$('chapter-title').textContent=chapters[current].title;
  chapterButtons.forEach((b,i)=>{const fill=clamp((story-chapters[i].at)/(chapters[i].end-chapters[i].at));b.setAttribute('aria-current',String(i===current));b.style.setProperty('--fill',fill.toFixed(4));b.firstElementChild.style.transform=`scaleX(${fill})`;});
  $('ending').hidden=story<60;
+ $('experience').classList.toggle('orbit-enabled',canOrbit());
 }
 const chapterButtons=chapters.map((c,i)=>{const b=document.createElement('button');b.innerHTML='<span></span>';b.title=c.title;b.setAttribute('aria-label',`Chapter ${i+1}: ${c.title}`);b.addEventListener('click',()=>{if(!started)startFilm();story=c.at+.15;finished=false;captionKey='';dirty=true;});$('chapters').append(b);return b});
 const pollen=Array.from({length:110},()=>({x:range(-13,13),z:range(-10,12),y:range(.4,7),a:rand()*TAU,s:range(3,11),speed:range(.4,1)}));
@@ -800,7 +853,7 @@ function toggleSound(){soundChosen=true;audioEnabled=!audioEnabled;syncSound();a
 function startMusic(){music.currentTime=0;if(!soundChosen)audioEnabled=true;syncSound();audioVisibility();}
 
 function applyNames(){document.title=config.herName?`For ${config.herName}`:'For you';document.querySelector('meta[name="description"]').content=`A little love letter${config.herName?` for ${config.herName}`:''}: flowers, a table for two, and how much I love you.`;document.querySelector('.tiny-signature').textContent=(config.yourName||'me')+' + '+(config.herName||'you')+'  ♡';$('her-name').value=config.herName;$('your-name').value=config.yourName;$('last-line').value=config.lastLine;document.querySelector('#cover p').textContent=config.herName?`${config.herName}, this is my kind of love letter.`:'This is my kind of love letter.';captionKey='';if(started)updateCaption();}
-function startFilm(){started=true;story=0;finished=false;paused=false;last=0;captionKey='';document.body.classList.remove('paused');$('cover').classList.add('departed');$('cover').inert=true;$('pause').classList.remove('initially-hidden');$('transport').classList.remove('initially-hidden');$('pause').setAttribute('aria-label','Pause animation');$('pause').title='Pause';$('ending').hidden=true;startMusic();dirty=true;}
+function startFilm(){resetEndingOrbit();started=true;story=0;finished=false;paused=false;last=0;captionKey='';document.body.classList.remove('paused');$('cover').classList.add('departed');$('cover').inert=true;$('pause').classList.remove('initially-hidden');$('transport').classList.remove('initially-hidden');$('pause').setAttribute('aria-label','Pause animation');$('pause').title='Pause';$('ending').hidden=true;startMusic();dirty=true;}
 function setPaused(value){paused=!!value;document.body.classList.toggle('paused',paused);$('pause').setAttribute('aria-label',paused?'Play animation':'Pause animation');$('pause').title=paused?'Play':'Pause';last=0;audioVisibility();dirty=true;}
 $('begin').addEventListener('click',startFilm);$('again').addEventListener('click',startFilm);$('pause').addEventListener('click',()=>setPaused(!paused));$('sound').addEventListener('click',toggleSound);$('retry').addEventListener('click',()=>location.reload());
 $('reduced-note').hidden=!reduced.matches;
@@ -813,9 +866,23 @@ function readForm(){config.herName=$('her-name').value.trim().slice(0,50);config
 $('personalize-form').addEventListener('submit',e=>{e.preventDefault();readForm();$('personalize').close();toast('Made a little more yours.');});
 $('save-file').addEventListener('click',()=>{readForm();const json=JSON.stringify(config).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');const html=pristineHTML.replace(/(<script id="love-config" type="application\/json">)[\s\S]*?(<\/script>)/,(_,open,close)=>open+json+close);const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='somewhere-just-us.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);toast('Her website is saved.');});
 document.addEventListener('keydown',e=>{if($('personalize').open||e.target.matches('input,textarea,button'))return;if(e.code==='Space'&&started){e.preventDefault();setPaused(!paused)}if(e.key==='ArrowRight'&&started){e.preventDefault();const next=chapters.find(c=>c.at>story+.5);if(next){story=next.at+.1;finished=false;dirty=true;}}if(e.key==='ArrowLeft'&&started){e.preventDefault();let i=story>=62?chapters.length-1:chapters.findIndex(c=>story>=c.at&&story<c.end);story=chapters[Math.max(0,i-1)].at+.1;finished=false;dirty=true;}});
-window.addEventListener('pointermove',e=>{pointer.tx=e.clientX/W*2-1;pointer.ty=e.clientY/H*2-1},{passive:true});
+window.addEventListener('pointermove',e=>{
+ pointer.tx=e.clientX/W*2-1;pointer.ty=e.clientY/H*2-1;
+ if(!canOrbit()||$('personalize').open||e.target.closest('button,dialog'))return;
+ if(e.pointerType==='touch'){
+  if(e.pointerId!==endingOrbit.pointerId)return;
+  endingOrbit.target=clamp(endingOrbit.startTarget+(e.clientX-endingOrbit.startX)/W*orbitLimit*2,-orbitLimit,orbitLimit);
+ }else endingOrbit.target=clamp(pointer.tx,-1,1)*orbitLimit;
+ dirty=true;
+},{passive:true});
+$('experience').addEventListener('pointerdown',e=>{
+ if(!canOrbit()||e.pointerType!=='touch'||endingOrbit.pointerId!==null||$('personalize').open||e.target.closest('button,dialog'))return;
+ endingOrbit.pointerId=e.pointerId;endingOrbit.startX=e.clientX;endingOrbit.startTarget=endingOrbit.target;$('experience').setPointerCapture(e.pointerId);
+},{passive:true});
+for(const event of['pointerup','pointercancel'])window.addEventListener(event,e=>{if(e.pointerId===endingOrbit.pointerId)releaseOrbitDrag()},{passive:true});
+$('experience').addEventListener('lostpointercapture',e=>{if(e.pointerId===endingOrbit.pointerId)endingOrbit.pointerId=null;});
 window.addEventListener('pointerdown',e=>{if(!e.target.closest('button,dialog'))pointerBurst(e.clientX,e.clientY)},{passive:true});
-document.addEventListener('visibilitychange',()=>{visible=!document.hidden;last=0;audioVisibility();if(visible){dirty=true;if(!frameId)frameId=requestAnimationFrame(frame);}});
+document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(!visible)releaseOrbitDrag();last=0;audioVisibility();if(visible){dirty=true;if(!frameId)frameId=requestAnimationFrame(frame);}});
 let resizeTimer=0;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(!contextLost){resize();resizeFX();dirty=true}},100)});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;setPaused(true);$('error').hidden=false;$('error').querySelector('h2').textContent='The garden took a little pause.';$('error').querySelector('p').textContent='Your browser reset its graphics connection. Reload to grow it again.';});
 canvas.addEventListener('webglcontextrestored',()=>{location.reload()});
@@ -826,6 +893,7 @@ function frame(now){
  if(!last)last=now;const dt=Math.min((now-last)/1000,.25);last=now;
  const play=!paused&&(started||!reduced.matches);
  if(play){clock+=dt;if(started&&!finished){story=Math.min(62,story+dt);if(story>=62)finished=true;}pointer.x=mix(pointer.x,pointer.tx,1-Math.exp(-dt*3));pointer.y=mix(pointer.y,pointer.ty,1-Math.exp(-dt*3));dirty=true;}
+ tickEndingOrbit(dt);
  // Cap drawing at 45 fps (30 on narrow screens); time-based motion never depends on frame count.
  if(dirty&&(now-lastRender>1000/(W<700?30:45))){
   updateCamera();updateWorld();if(started)updateCaption();renderWorld();drawAtmosphere();dirty=false;lastRender=now;frameCount++;fpsFrames++;
@@ -836,7 +904,7 @@ function frame(now){
 }
 function dispose(){cancelAnimationFrame(frameId);frameId=0;clearTimeout(toastTimer);clearTimeout(resizeTimer);audioPlayId++;music.pause();for(const m of meshes)gl.deleteBuffer(m.buffer);for(const b of flowerBatches){gl.deleteBuffer(b.buffer);gl.deleteBuffer(b.ib)}for(const t of textures)gl.deleteTexture(t);for(const t of targets){gl.deleteFramebuffer(t.f);gl.deleteTexture(t.t);if(t.d)gl.deleteRenderbuffer(t.d)}for(const p of[mainProgram,flowerProgram,skyProgram,pointProgram,blurProgram,compositeProgram])if(p)gl.deleteProgram(p.p);gl.deleteBuffer(pointBuffer);gl.deleteBuffer(screenBuffer);}
 window.addEventListener('pagehide',event=>{if(!event.persisted)dispose()});
-if(testMode){window.__ONLY_US__={seek(t){if(!started)startFilm();story=clamp(Number(t),0,62);clock=story;finished=story>=62;setPaused(true);captionKey='';updateCamera();updateWorld();updateCaption();renderWorld();drawAtmosphere();dirty=false;return this.state()},play(){if(!started)startFilm();setPaused(false)},pause(){setPaused(true)},state(){return{started,paused,finished,story,clock,frameCount,flowers:flowerInstances.length,meshes:meshes.length,particles:particleCount,bloomParticles:bloomParticleCount,visibleButterflies:butterflies.filter(b=>b.body.alpha>.005).length,openingButterflies:butterflies.filter(b=>b.opening&&b.body.alpha>.005).length,glError:gl.getError(),instancing:!!instancing,camera:eye.slice(),viewport:[W,H],renderer:gl.getParameter(gl.RENDERER)}}};}
+if(testMode){window.__ONLY_US__={seek(t){if(!started)startFilm();story=clamp(Number(t),0,62);clock=story;finished=story>=62;setPaused(true);captionKey='';updateCamera();updateWorld();updateCaption();renderWorld();drawAtmosphere();dirty=false;return this.state()},play(){if(!started)startFilm();setPaused(false)},pause(){setPaused(true)},state(){return{started,paused,finished,story,clock,frameCount,flowers:flowerInstances.length,meshes:meshes.length,pathRoses:pathRoseInstances.length,growingPathRoses:pathRoseInstances.filter(f=>story>=f[4]).length,orbitAngle:endingOrbit.angle,orbitTarget:endingOrbit.target,orbitDragging:endingOrbit.pointerId!==null,particles:particleCount,bloomParticles:bloomParticleCount,visibleButterflies:butterflies.filter(b=>b.body.alpha>.005).length,openingButterflies:butterflies.filter(b=>b.opening&&b.body.alpha>.005).length,glError:gl.getError(),instancing:!!instancing,camera:eye.slice(),viewport:[W,H],renderer:gl.getParameter(gl.RENDERER)}}};}
 try{initRenderer();resize();resizeFX();buildWorld();applyNames();$('loading').classList.add('ready');frameId=requestAnimationFrame(frame);if(testMode&&params.has('at')){window.__ONLY_US__.seek(Number(params.get('at')));}}
 catch(error){console.error('Garden initialization failed:',error);$('loading').classList.add('ready');$('error').hidden=false;}
 })();

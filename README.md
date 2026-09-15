@@ -19,6 +19,7 @@ The Pages workflow copies the standalone HTML to the site's `index.html`, so the
 - Use the sound button to turn the music on or off.
 - Pause and resume with the playback button.
 - Jump between scenes using the chapter controls along the bottom.
+- At the ending, move the mouse left or right, or drag horizontally on a phone, to look around the scene.
 - Use the pencil button to personalize the names and final message, then select **Save her website** to download a personalized copy with the music included.
 - Select **One more time** at the end to replay the experience.
 
