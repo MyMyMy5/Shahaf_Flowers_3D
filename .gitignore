@@ -1,0 +1,11 @@
+# Local browser checks and generated verification artifacts.
+.playwright-cli/
+output/
+_site/
+
+# Reference project used while creating this 3D experience.
+Shahaf_Flowers/
+
+# Local operating-system files.
+.DS_Store
+Thumbs.db
