@@ -1,0 +1,31 @@
+/* Walking controls live only in the separate edition. */
+body.walking #transport{visibility:hidden;pointer-events:none;opacity:0}
+body.walking #experience{touch-action:none}
+body.walking #caption{top:12%;left:8%;right:8%}
+body.walking #caption h2{font-size:clamp(29px,3.2vw,47px);letter-spacing:-1px}
+body.walking #caption p{font-size:14px;max-width:440px;margin:12px auto 0}
+#walk-hud{position:absolute;z-index:11;bottom:max(28px,env(safe-area-inset-bottom));left:38px;right:38px;display:flex;align-items:flex-end;justify-content:space-between;gap:22px;pointer-events:none}
+#walk-hud button,#walk-stick{pointer-events:auto;touch-action:none}
+.walk-note{max-width:300px;text-shadow:0 2px 8px #000}
+.walk-note p{font:italic 17px Georgia;margin:7px 0 14px;color:#f1daca}
+.walk-track{height:2px;background:#f9d9b82b;width:180px;overflow:hidden;margin-bottom:12px}
+.walk-track i{height:100%;width:100%;display:block;background:#efd3a8;transform:scaleX(0);transform-origin:left;box-shadow:0 0 12px #eacba9}
+.keyboard-hint{font-size:10px;letter-spacing:.2px;color:#d0c0b8}
+.walk-actions{display:flex;align-items:center;gap:10px}
+.walk-button{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #e6c2ac52;background:#231e2bcc;backdrop-filter:blur(12px);border-radius:30px;padding:14px 20px;font-size:12px;min-height:46px;box-shadow:0 5px 25px #0002}
+.walk-button:hover,.walk-button[aria-pressed=true]{background:#624954d9;border-color:#edc8ae}
+.walk-primary{background:#e7c4ad;color:#322631;border-color:#e7c4ad}
+.walk-primary:hover,.walk-primary[aria-pressed=true]{background:#f1d7bd;color:#322631}
+.walk-button kbd{font:9px 'Segoe UI',sans-serif;padding:3px 5px;border:1px solid #c2aba644;border-radius:4px;color:#d6c3ba}
+#walk-stick{display:none;position:relative;width:106px;height:106px;border:1px solid #e2c7b340;border-radius:50%;background:radial-gradient(circle,#d6afa619,transparent 65%);backdrop-filter:blur(7px);flex-shrink:0}
+#stick-knob{position:absolute;width:43px;height:43px;left:31px;top:31px;border:1px solid #eed4bf75;border-radius:50%;background:#e5bb9e28;box-shadow:0 0 18px #e6c4ad12;pointer-events:none}
+.stick-arrow{position:absolute;top:5px;width:100%;text-align:center;font-size:14px;color:#e5c7b488;pointer-events:none}
+.stick-label{position:absolute;bottom:9px;width:100%;text-align:center;font-size:8px;letter-spacing:2px;color:#e5c7b499;pointer-events:none}
+#walk-speech{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-100%);border:1px solid #eed4ba4d;background:#282332ef;box-shadow:0 10px 30px #08061335;backdrop-filter:blur(14px);border-radius:17px 17px 17px 3px;padding:13px 19px;max-width:260px;pointer-events:none;text-align:left}
+#walk-speaker{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#e1b7a1}
+#walk-speech p{font:italic 15px/1.45 Georgia;margin:6px 0 0;color:#fff0db}
+#arrival-note{position:absolute;bottom:8%;width:100%;text-align:center;z-index:8;font:italic 18px Georgia;color:#f3dbca;letter-spacing:.3px;text-shadow:0 2px 12px #000;pointer-events:none}
+@media(pointer:coarse){#walk-stick{display:block}.keyboard-hint,.walk-button kbd{display:none}.walk-note{position:absolute;bottom:123px;left:0}.walk-note .eyebrow,.walk-note p{display:none}.walk-track{width:106px;margin:0}.walk-actions{flex-direction:column;align-items:stretch}.walk-button{padding:13px 16px;min-width:150px}}
+@media(max-width:650px){#walk-hud{left:22px;right:22px;bottom:max(23px,env(safe-area-inset-bottom))}.walk-note{max-width:175px}.walk-note p{font-size:13px}.keyboard-hint{max-width:150px;display:block;line-height:1.6}.walk-actions{flex-direction:column}.walk-button{padding:12px 15px;font-size:11px}.walk-button kbd{display:none}body.walking #caption{top:13%;left:9%;right:9%}body.walking #caption h2{font-size:32px}body.walking #caption p{font-size:13px;line-height:1.6}#walk-speech{max-width:205px;padding:11px 15px}#walk-speech p{font-size:13px}}
+@media(max-width:650px) and (pointer:coarse){.keyboard-hint{display:none}}
+@media(max-height:500px){#walk-hud{bottom:16px}body.walking #caption{top:15%}body.walking #caption h2{font-size:27px}body.walking #caption p{font-size:12px;margin-top:8px}.walk-note p{font-size:13px}#walk-stick{width:86px;height:86px}#stick-knob{left:21px;top:21px}.walk-note{bottom:100px}.walk-button{padding:10px 16px;min-height:40px}}

@@ -1,0 +1,267 @@
+{
+  "scene": "Shahaf_Garden_Authoring_v001",
+  "objects": 1758,
+  "evaluated_triangles": 4763079,
+  "duration_seconds": 112,
+  "fps": 24,
+  "path_roses": 24,
+  "opening_checks": [
+    {
+      "id": "door_center",
+      "width": 1.72,
+      "height": 3.25,
+      "center_ray_clear": true
+    },
+    {
+      "id": "window_left",
+      "width": 1.62,
+      "height": 2.64,
+      "center_ray_clear": true
+    },
+    {
+      "id": "window_right",
+      "width": 1.62,
+      "height": 2.64,
+      "center_ray_clear": true
+    }
+  ],
+  "structural_manifold": {
+    "SF3D_Facade_structure": {
+      "non_manifold_edges": 0,
+      "faces": 178
+    },
+    "SF3D_Rear_structure": {
+      "non_manifold_edges": 0,
+      "faces": 45
+    },
+    "SF3D_Terrace_foundation": {
+      "non_manifold_edges": 0,
+      "faces": 34
+    }
+  },
+  "hero_visibility": {
+    "Neria": {
+      "inside_frame": true,
+      "first_ray_hit": "SF3D_Neria_hair_cap",
+      "self_visible": true
+    },
+    "Shahaf": {
+      "inside_frame": true,
+      "first_ray_hit": "SF3D_Shahaf_hair_cap",
+      "self_visible": true
+    }
+  },
+  "floor_contacts": {
+    "SF3D_Chair_leg": {
+      "minimum_z": 0.24595193564891815,
+      "floor_z": 0.243
+    },
+    "SF3D_Chair_leg.001": {
+      "minimum_z": 0.24595193564891815,
+      "floor_z": 0.243
+    },
+    "SF3D_Neria_shoe": {
+      "minimum_z": 0.24500001966953278,
+      "floor_z": 0.243
+    },
+    "SF3D_Shahaf_shoe": {
+      "minimum_z": 0.24500001966953278,
+      "floor_z": 0.243
+    }
+  },
+  "animation_samples": [
+    {
+      "seconds": 0,
+      "hero_scale": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "hero_bloom": 0.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "seconds": 3,
+      "hero_scale": [
+        0.6795815229415894,
+        0.6795815229415894,
+        0.6795815229415894
+      ],
+      "hero_bloom": 0.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "seconds": 6.5,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 0.9884897470474243,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "seconds": 16,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "seconds": 28,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 32,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 41,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 0,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 44.4,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 22,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 50,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 24,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 84,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 24,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 100,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 24,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "seconds": 112,
+      "hero_scale": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.2000000476837158
+      ],
+      "hero_bloom": 1.0,
+      "visible_path_roses": 24,
+      "cafe_scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "packed_sound": true,
+  "sound_tracks": 1,
+  "render_engine": "CYCLES",
+  "device": "GPU",
+  "production_camera": {
+    "location": [
+      7.528800010681152,
+      -17.31760025024414,
+      6.906400203704834
+    ],
+    "lens_mm": 31.26106834411621,
+    "vertical_fov_degrees": 42
+  }
+}

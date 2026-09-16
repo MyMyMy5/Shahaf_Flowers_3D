@@ -2,6 +2,20 @@
 
 A personal, animated love letter for Shahaf: blooming flowers, a candlelit table for two, and a soundtrack.
 
+## Choose an experience
+
+- [Blender garden — the film](https://mymymy5.github.io/Shahaf_Flowers_3D/garden/)
+- [Blender garden — walk together](https://mymymy5.github.io/Shahaf_Flowers_3D/garden/?mode=walk)
+- [The original film](https://mymymy5.github.io/Shahaf_Flowers_3D/)
+
+The new garden uses models authored in Blender. It offers the cinematic love letter and a walking version: Shahaf leads the pair along the path while they hold hands, can look at Neria, and receives affectionate responses when she pauses. At the café, the characters sit down and the film continues.
+
+On a computer, use WASD or the arrow keys to walk and **E** to look at him. On a phone, use the thumb control and **Look at him** button. **Walk with me** also follows the path automatically. The ending lets you replay or switch experiences.
+
+The pencil menu personalizes the names and final message. **Save her website** downloads one HTML file containing both modes, the models, and the music; it works offline.
+
+The original `somewhere-just-us.html` remains unchanged.
+
 The seven-chapter film runs for 1 minute 52 seconds. Its later chapters focus on caring for the relationship and looking forward to a future together.
 
 ## Open the experience
@@ -14,7 +28,7 @@ The page includes the animation and music, so the HTML file also works offline a
 
 The [live website](https://mymymy5.github.io/Shahaf_Flowers_3D/) is published automatically when changes are pushed to `main`.
 
-The Pages workflow copies the standalone HTML to the site's `index.html`, so the experience opens directly at the main URL. You can also run **Deploy to GitHub Pages** manually from the repository's Actions tab.
+The Pages workflow keeps the original film at the main URL and publishes the new experience under `/garden/`. You can also run **Deploy to GitHub Pages** manually from the repository's Actions tab.
 
 ## Controls
 
@@ -30,5 +44,11 @@ The Pages workflow copies the standalone HTML to the site's `index.html`, so the
 - `somewhere-just-us.html` — the complete standalone experience.
 - `assets/song.mp3` — the soundtrack, also embedded in the HTML for offline sharing.
 - `.github/workflows/deploy-pages.yml` — automatic GitHub Pages deployment.
+- `garden/` — the Blender-based browser experience, source, bundled page and offline download.
+- `blender/shahaf-garden/` — editable Blender scenes, procedural source, export tools and review evidence.
+- `walk-together/` — the preserved interaction prototype in the original renderer.
+- `BUILD_LOG.md` — implementation history, observed problems and corrections.
+
+See [garden/README.md](garden/README.md) for build instructions and browser checks.
 
 The animation uses WebGL and JavaScript. Enable hardware acceleration in your browser if the garden cannot load.

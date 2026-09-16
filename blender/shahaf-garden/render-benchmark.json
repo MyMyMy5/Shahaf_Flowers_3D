@@ -1,0 +1,35 @@
+{
+  "engine": "CYCLES",
+  "device": "OPTIX",
+  "resolution": [
+    1280,
+    800
+  ],
+  "samples": 48,
+  "frames": [
+    {
+      "frame": 156,
+      "seconds": 6.795
+    },
+    {
+      "frame": 157,
+      "seconds": 4.458
+    },
+    {
+      "frame": 936,
+      "seconds": 5.49
+    },
+    {
+      "frame": 937,
+      "seconds": 5.539
+    },
+    {
+      "frame": 2687,
+      "seconds": 4.929
+    },
+    {
+      "frame": 2688,
+      "seconds": 4.925
+    }
+  ]
+}

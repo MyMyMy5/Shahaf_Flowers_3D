@@ -1,0 +1,16 @@
+{
+  "schema": "shahaf.blender-release-report.v1",
+  "authoringScene": "Shahaf_Garden_v001.blend",
+  "walkingScene": "Shahaf_Walking_Characters_v001.blend",
+  "runtime": "../../garden/",
+  "acceptance": "../../garden/acceptance.json",
+  "status": "local acceptance passed",
+  "geometryAudit": "geometry-audit.json",
+  "lightingManifest": "lighting-manifest.json",
+  "legacyContract": {
+    "applicable": false,
+    "retainedReport": "legacy-meshy-report.json",
+    "diagnostic": "function-gate-diagnostic.txt"
+  },
+  "provenance": "Locally authored procedural geometry; no paid generated assets."
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "game-room.opening-schedule.v1",
+  "roomId": "shahaf-garden",
+  "primaryArrival": {
+    "openingId": "open_canopy_front",
+    "exception": "The broad, open front canopy is the arrival; the rear service door is not the walking entrance."
+  },
+  "openings": [
+    {
+      "id": "open_canopy_front",
+      "type": "open-front",
+      "width": 6.7,
+      "clear": true
+    },
+    {
+      "id": "door_center",
+      "type": "exact-boolean",
+      "width": 1.72,
+      "height": 3.25,
+      "centerRayClear": true,
+      "sourceObject": "SF3D_Facade_structure"
+    },
+    {
+      "id": "window_left",
+      "type": "exact-boolean",
+      "width": 1.62,
+      "height": 2.64,
+      "centerRayClear": true,
+      "sourceObject": "SF3D_Facade_structure"
+    },
+    {
+      "id": "window_right",
+      "type": "exact-boolean",
+      "width": 1.62,
+      "height": 2.64,
+      "centerRayClear": true,
+      "sourceObject": "SF3D_Facade_structure"
+    }
+  ]
+}

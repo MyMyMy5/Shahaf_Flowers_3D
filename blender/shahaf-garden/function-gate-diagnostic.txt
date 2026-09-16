@@ -1,0 +1,159 @@
+FAIL: plan-metadata.json: complete reviewed-space coverage is required
+FAIL: room-brief.json: symmetry.appliesTo contains an invalid target
+FAIL: Function: missing artifact openingContactSheet
+FAIL: props.json: generation must use Meshy model meshy-5
+FAIL: props.json: current official Meshy pricing verification is required
+FAIL: props.json: positive creditsPerTexturedTask is required
+FAIL: props.json: hardCreditCeiling must be positive and no greater than the room credit budget
+FAIL: props.json: maxChargedAttemptsPerAsset must equal 2
+FAIL: prop arched_conservatory: function is required
+FAIL: prop arched_conservatory: description is required
+FAIL: prop arched_conservatory: class must be reusable or hero
+FAIL: prop arched_conservatory: three positive dimensions are required
+FAIL: prop arched_conservatory: attachmentFace is invalid
+FAIL: prop arched_conservatory: semanticFront is invalid
+FAIL: prop arched_conservatory: targetPolycount must be 100-300000
+FAIL: prop arched_conservatory: objective rejection criteria are required
+FAIL: prop arched_conservatory: image prompt and generator are required
+FAIL: prop arched_conservatory: approved reference image is missing
+FAIL: prop arched_conservatory: reference image requires explicit approval
+FAIL: prop stone_terrace: function is required
+FAIL: prop stone_terrace: description is required
+FAIL: prop stone_terrace: class must be reusable or hero
+FAIL: prop stone_terrace: three positive dimensions are required
+FAIL: prop stone_terrace: attachmentFace is invalid
+FAIL: prop stone_terrace: semanticFront is invalid
+FAIL: prop stone_terrace: targetPolycount must be 100-300000
+FAIL: prop stone_terrace: objective rejection criteria are required
+FAIL: prop stone_terrace: image prompt and generator are required
+FAIL: prop stone_terrace: approved reference image is missing
+FAIL: prop stone_terrace: reference image requires explicit approval
+FAIL: prop table_and_chairs: function is required
+FAIL: prop table_and_chairs: description is required
+FAIL: prop table_and_chairs: class must be reusable or hero
+FAIL: prop table_and_chairs: three positive dimensions are required
+FAIL: prop table_and_chairs: attachmentFace is invalid
+FAIL: prop table_and_chairs: semanticFront is invalid
+FAIL: prop table_and_chairs: targetPolycount must be 100-300000
+FAIL: prop table_and_chairs: objective rejection criteria are required
+FAIL: prop table_and_chairs: image prompt and generator are required
+FAIL: prop table_and_chairs: approved reference image is missing
+FAIL: prop table_and_chairs: reference image requires explicit approval
+FAIL: prop neria: function is required
+FAIL: prop neria: description is required
+FAIL: prop neria: class must be reusable or hero
+FAIL: prop neria: three positive dimensions are required
+FAIL: prop neria: attachmentFace is invalid
+FAIL: prop neria: semanticFront is invalid
+FAIL: prop neria: targetPolycount must be 100-300000
+FAIL: prop neria: objective rejection criteria are required
+FAIL: prop neria: image prompt and generator are required
+FAIL: prop neria: approved reference image is missing
+FAIL: prop neria: reference image requires explicit approval
+FAIL: prop shahaf: function is required
+FAIL: prop shahaf: description is required
+FAIL: prop shahaf: class must be reusable or hero
+FAIL: prop shahaf: three positive dimensions are required
+FAIL: prop shahaf: attachmentFace is invalid
+FAIL: prop shahaf: semanticFront is invalid
+FAIL: prop shahaf: targetPolycount must be 100-300000
+FAIL: prop shahaf: objective rejection criteria are required
+FAIL: prop shahaf: image prompt and generator are required
+FAIL: prop shahaf: approved reference image is missing
+FAIL: prop shahaf: reference image requires explicit approval
+FAIL: prop garden_blossoms: function is required
+FAIL: prop garden_blossoms: description is required
+FAIL: prop garden_blossoms: class must be reusable or hero
+FAIL: prop garden_blossoms: three positive dimensions are required
+FAIL: prop garden_blossoms: attachmentFace is invalid
+FAIL: prop garden_blossoms: semanticFront is invalid
+FAIL: prop garden_blossoms: targetPolycount must be 100-300000
+FAIL: prop garden_blossoms: objective rejection criteria are required
+FAIL: prop garden_blossoms: image prompt and generator are required
+FAIL: prop garden_blossoms: approved reference image is missing
+FAIL: prop garden_blossoms: reference image requires explicit approval
+FAIL: prop path_roses: function is required
+FAIL: prop path_roses: description is required
+FAIL: prop path_roses: class must be reusable or hero
+FAIL: prop path_roses: three positive dimensions are required
+FAIL: prop path_roses: attachmentFace is invalid
+FAIL: prop path_roses: semanticFront is invalid
+FAIL: prop path_roses: targetPolycount must be 100-300000
+FAIL: prop path_roses: objective rejection criteria are required
+FAIL: prop path_roses: image prompt and generator are required
+FAIL: prop path_roses: approved reference image is missing
+FAIL: prop path_roses: reference image requires explicit approval
+FAIL: prop climbing_flowers: function is required
+FAIL: prop climbing_flowers: description is required
+FAIL: prop climbing_flowers: class must be reusable or hero
+FAIL: prop climbing_flowers: three positive dimensions are required
+FAIL: prop climbing_flowers: attachmentFace is invalid
+FAIL: prop climbing_flowers: semanticFront is invalid
+FAIL: prop climbing_flowers: targetPolycount must be 100-300000
+FAIL: prop climbing_flowers: objective rejection criteria are required
+FAIL: prop climbing_flowers: image prompt and generator are required
+FAIL: prop climbing_flowers: approved reference image is missing
+FAIL: prop climbing_flowers: reference image requires explicit approval
+FAIL: prop butterflies: function is required
+FAIL: prop butterflies: description is required
+FAIL: prop butterflies: class must be reusable or hero
+FAIL: prop butterflies: three positive dimensions are required
+FAIL: prop butterflies: attachmentFace is invalid
+FAIL: prop butterflies: semanticFront is invalid
+FAIL: prop butterflies: targetPolycount must be 100-300000
+FAIL: prop butterflies: objective rejection criteria are required
+FAIL: prop butterflies: image prompt and generator are required
+FAIL: prop butterflies: approved reference image is missing
+FAIL: prop butterflies: reference image requires explicit approval
+FAIL: prop paper_lanterns: function is required
+FAIL: prop paper_lanterns: description is required
+FAIL: prop paper_lanterns: class must be reusable or hero
+FAIL: prop paper_lanterns: three positive dimensions are required
+FAIL: prop paper_lanterns: attachmentFace is invalid
+FAIL: prop paper_lanterns: semanticFront is invalid
+FAIL: prop paper_lanterns: targetPolycount must be 100-300000
+FAIL: prop paper_lanterns: objective rejection criteria are required
+FAIL: prop paper_lanterns: image prompt and generator are required
+FAIL: prop paper_lanterns: approved reference image is missing
+FAIL: prop paper_lanterns: reference image requires explicit approval
+FAIL: room-layout.json: instance references unknown asset None
+FAIL: room-layout.json: instance references unknown asset None
+FAIL: room-layout.json: instance references unknown asset None
+FAIL: room-layout.json: instance count for arched_conservatory does not match intendedInstances
+FAIL: room-layout.json: instance count for stone_terrace does not match intendedInstances
+FAIL: room-layout.json: instance count for table_and_chairs does not match intendedInstances
+FAIL: room-layout.json: instance count for neria does not match intendedInstances
+FAIL: room-layout.json: instance count for shahaf does not match intendedInstances
+FAIL: room-layout.json: instance count for garden_blossoms does not match intendedInstances
+FAIL: room-layout.json: instance count for path_roses does not match intendedInstances
+FAIL: room-layout.json: instance count for climbing_flowers does not match intendedInstances
+FAIL: room-layout.json: instance count for butterflies does not match intendedInstances
+FAIL: room-layout.json: instance count for paper_lanterns does not match intendedInstances
+FAIL: room-brief.json: environment.type must be none or equirectangular
+FAIL: opening open_canopy_front: invalid kind
+FAIL: opening open_canopy_front: positive dimensions are required
+FAIL: opening open_canopy_front: destination/purpose is required
+FAIL: opening open_canopy_front: missing mask artifact
+FAIL: opening open_canopy_front: missing cutter artifact
+FAIL: opening open_canopy_front: mask/dimensions are not approved
+FAIL: opening door_center: invalid kind
+FAIL: opening door_center: positive dimensions are required
+FAIL: opening door_center: destination/purpose is required
+FAIL: opening door_center: missing mask artifact
+FAIL: opening door_center: missing cutter artifact
+FAIL: opening door_center: mask/dimensions are not approved
+FAIL: opening window_left: invalid kind
+FAIL: opening window_left: positive dimensions are required
+FAIL: opening window_left: destination/purpose is required
+FAIL: opening window_left: missing mask artifact
+FAIL: opening window_left: missing cutter artifact
+FAIL: opening window_left: mask/dimensions are not approved
+FAIL: opening window_right: invalid kind
+FAIL: opening window_right: positive dimensions are required
+FAIL: opening window_right: destination/purpose is required
+FAIL: opening window_right: missing mask artifact
+FAIL: opening window_right: missing cutter artifact
+FAIL: opening window_right: mask/dimensions are not approved
+FAIL: openings.json: primary arrival must be a door/passage opening
+FAIL: Function gate: explicit approval is required
+FAIL: final-report.json: gates.function must be true

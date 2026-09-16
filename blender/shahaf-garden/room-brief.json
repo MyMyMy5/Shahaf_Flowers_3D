@@ -1,0 +1,82 @@
+{
+  "schema": "game-room.room-brief.v1",
+  "roomId": "shahaf-garden",
+  "family": "custom",
+  "purpose": "A hopeful love-letter garden and candlelit table for Neria and Shahaf. Sharing a home is a future hope.",
+  "runtimeSurface": "Separate cinematic and interactive browser editions; current Blender file is the authoring scene.",
+  "boundsMeters": [
+    30,
+    30,
+    16
+  ],
+  "hero": {
+    "id": "table_and_couple",
+    "role": "emotional focus",
+    "reservedBoundsMeters": [
+      3.7,
+      2.4,
+      2.2
+    ]
+  },
+  "symmetry": {
+    "mode": "bilateral",
+    "order": 2,
+    "appliesTo": [
+      "conservatory facade",
+      "table seating",
+      "rose rows"
+    ],
+    "exceptions": [
+      "curved approach",
+      "natural planting",
+      "camera compositions"
+    ]
+  },
+  "circulation": {
+    "description": "Open canopy arrival from the curved stone walkway, followed by access to either chair. Walking prototype follows the path and releases controls at the terrace.",
+    "minimumClearanceMeters": 1.5
+  },
+  "productionCamera": {
+    "viewport": [
+      1600,
+      1000
+    ],
+    "location": [
+      7.528800010681152,
+      -17.31760025024414,
+      6.906400203704834
+    ],
+    "target": [
+      -2.8,
+      0.8,
+      3.45
+    ],
+    "verticalFovDegrees": 42
+  },
+  "performanceBudget": {
+    "maxSceneTriangles": 500000,
+    "maxVLowBytes": 20000000,
+    "maxHighTextureBytes": 24000000,
+    "status": "future browser targets; current authoring triangles exceed target"
+  },
+  "creditBudget": {
+    "maximumCredits": 0,
+    "approvalRequired": false
+  },
+  "environment": {
+    "type": "procedural",
+    "identity": "blue hour garden",
+    "source": "scripts/build_scene.py and scripts/polish_scene.py",
+    "assignmentKey": "SF3D_Midnight_world"
+  },
+  "artifacts": {
+    "floorPlan": "renders/review_current_floor_plan.png",
+    "reflectedCeilingPlan": "renders/review_current_reflected_ceiling.png",
+    "planMetadata": "plan-metadata.json",
+    "wallElevations": [
+      "renders/review_current_facade_elevation.png"
+    ],
+    "visualTarget": "renders/production_corrected_v001.png",
+    "openingContactSheet": ""
+  }
+}

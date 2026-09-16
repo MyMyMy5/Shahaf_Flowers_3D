@@ -1,0 +1,40 @@
+{
+  "schema": "game-room.milestone-reviews.v1",
+  "roomId": "shahaf-garden",
+  "function": {
+    "status": "pending",
+    "approvedBy": "",
+    "approvedAt": "",
+    "evidence": [
+      "geometry-audit.json",
+      "lighting-manifest.json",
+      "README.md"
+    ],
+    "strangestElement": "Oversized fantasy flowers surrounding a miniature conservatory.",
+    "notes": "User authorized autonomous local construction. No human milestone approval is being fabricated. Runtime integration remains incomplete."
+  },
+  "form": {
+    "status": "pending",
+    "approvedBy": "",
+    "approvedAt": "",
+    "evidence": [
+      "geometry-audit.json",
+      "lighting-manifest.json",
+      "README.md"
+    ],
+    "strangestElement": "Oversized fantasy flowers surrounding a miniature conservatory.",
+    "notes": "User authorized autonomous local construction. No human milestone approval is being fabricated. Runtime integration remains incomplete."
+  },
+  "runtime": {
+    "status": "pending",
+    "approvedBy": "",
+    "approvedAt": "",
+    "evidence": [
+      "geometry-audit.json",
+      "lighting-manifest.json",
+      "README.md"
+    ],
+    "strangestElement": "Oversized fantasy flowers surrounding a miniature conservatory.",
+    "notes": "User authorized autonomous local construction. No human milestone approval is being fabricated. Runtime integration remains incomplete."
+  }
+}

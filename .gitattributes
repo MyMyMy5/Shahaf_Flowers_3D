@@ -1,0 +1,8 @@
+# Generated bundles include upstream GLSL template strings. Preserve their
+# whitespace; review and edit the source modules instead.
+garden/app.js text eol=lf -whitespace linguist-generated=true
+garden/standalone.html text eol=lf -whitespace linguist-generated=true
+garden/index.html text eol=lf linguist-generated=true
+walk-together/index.html text eol=lf linguist-generated=true
+*.glb binary
+*.blend binary

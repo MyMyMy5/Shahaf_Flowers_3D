@@ -1,0 +1,81 @@
+{
+  "schema": "game-room.room-final-report.v1",
+  "roomId": "shahaf-garden",
+  "gates": {
+    "function": false,
+    "form": false,
+    "runtime": false
+  },
+  "formChecks": {
+    "floorPlanParity": false,
+    "primaryArrival": true,
+    "symmetry": false,
+    "shell": false,
+    "manifold": true,
+    "booleans": true,
+    "collisions": false,
+    "support": false,
+    "attachmentOrientation": false,
+    "ceilingAttachmentOrientation": false,
+    "seatingOrientation": false,
+    "focalDistribution": false,
+    "heroClearance": false,
+    "colonnades": false,
+    "screenClearance": false,
+    "scale": false,
+    "camera": true,
+    "ceilingCoverage": false,
+    "environmentCoverage": false,
+    "provenance": true
+  },
+  "reviewRenders": {
+    "corners": [
+      "renders/review_current_corner_front_left.png",
+      "renders/review_current_corner_front_right.png",
+      "renders/review_current_corner_rear_left.png",
+      "renders/review_current_corner_rear_right.png"
+    ],
+    "ceiling": [
+      "renders/review_current_ceiling_center_up.png",
+      "renders/review_current_ceiling_oblique_front.png",
+      "renders/review_current_ceiling_oblique_rear.png"
+    ],
+    "environment": {
+      "cycles": "renders/production_corrected_v001.png",
+      "eevee_comparison": "renders/eevee_comparison_v001.png"
+    }
+  },
+  "runtimeChecks": {
+    "vlow": false,
+    "textureTiers": false,
+    "lightmap": false,
+    "lightingManifest": true,
+    "performance": false,
+    "browserCapture": "../../output/playwright/walk-his-face-phone.png",
+    "errors": [
+      "Blender assets have not yet been optimized or integrated into the browser prototype."
+    ]
+  },
+  "postmortem": {
+    "observations": [
+      "The Blender scene has 4,717,431 evaluated triangles.",
+      "The original published film remains intact.",
+      "Walking mechanics work in a separate custom-WebGL edition."
+    ],
+    "corrections": [
+      "Terrain face winding corrected.",
+      "Garland world transforms restored after dependency graph evaluation.",
+      "Physical contacts and hanging fixtures adjusted.",
+      "Close walking camera replaced a view obstructed by a large flower.",
+      "Portrait caf\u00e9 handoff now matches camera distance and field of view."
+    ],
+    "remainingRisks": [
+      "No complete rendered movie yet.",
+      "Authoring geometry exceeds the intended browser budget.",
+      "A full-scene collision audit has not been performed.",
+      "Human milestone approvals are not recorded; the stock Meshy validator does not match the local procedural workflow."
+    ]
+  },
+  "proposedLessons": [],
+  "status": "authoring review; goal and runtime integration incomplete"
+}

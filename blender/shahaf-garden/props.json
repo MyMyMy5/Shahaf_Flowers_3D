@@ -1,0 +1,86 @@
+{
+  "schema": "game-room.prop-manifest.v1",
+  "roomId": "shahaf-garden",
+  "generation": {
+    "provider": "local-procedural",
+    "apiModel": null,
+    "pricingSource": null,
+    "pricingVerifiedAt": null,
+    "creditsPerTexturedTask": 0,
+    "hardCreditCeiling": 0,
+    "maxChargedAttemptsPerAsset": 0
+  },
+  "assets": [
+    {
+      "id": "arched_conservatory",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "stone_terrace",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "table_and_chairs",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "neria",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "shahaf",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "garden_blossoms",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "path_roses",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "climbing_flowers",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "butterflies",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    },
+    {
+      "id": "paper_lanterns",
+      "provenance": "Procedurally authored by primary agent in Blender",
+      "source": "scripts/build_scene.py",
+      "status": "authoring",
+      "externalModel": false
+    }
+  ],
+  "notes": "No Meshy service, generated reference image, purchased mesh, or external HDRI was used."
+}

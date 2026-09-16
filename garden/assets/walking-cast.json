@@ -1,0 +1,10 @@
+{
+  "actors": 2,
+  "partsPerActor": {
+    "neria": 22,
+    "shahaf": 23
+  },
+  "previewFrames": 48,
+  "gltfBytes": 1088944,
+  "sourceGardenUnchanged": true
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "game-room.layout.v1",
+  "roomId": "shahaf-garden",
+  "units": "meters",
+  "surfaces": [
+    {
+      "id": "garden",
+      "shape": "circular terrain",
+      "radius": 15
+    },
+    {
+      "id": "terrace",
+      "shape": "round platform",
+      "center": [
+        0,
+        1.2,
+        0.2
+      ],
+      "radius": 4.1
+    },
+    {
+      "id": "canopy",
+      "bounds": [
+        6.8,
+        4.1,
+        5.32
+      ]
+    }
+  ],
+  "instances": [
+    {
+      "id": "table_and_couple",
+      "center": [
+        0,
+        -0.65,
+        0.245
+      ]
+    },
+    {
+      "id": "path_roses",
+      "count": 24,
+      "arrangement": "both sides of the curved walkway"
+    },
+    {
+      "id": "garden_flowers",
+      "count": 93
+    }
+  ],
+  "productionCamera": {
+    "location": [
+      7.528800010681152,
+      -17.31760025024414,
+      6.906400203704834
+    ],
+    "target": [
+      -2.8,
+      0.8,
+      3.45
+    ],
+    "verticalFovDegrees": 42
+  }
+}

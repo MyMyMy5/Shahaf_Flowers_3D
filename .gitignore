@@ -9,3 +9,15 @@ Shahaf_Flowers/
 # Local operating-system files.
 .DS_Store
 Thumbs.db
+
+# Python bytecode and Blender's local save backups.
+__pycache__/
+*.blend1
+*.blend2
+node_modules/
+garden/app.js.map
+
+# Local comparison buffers and duplicate failed review-camera captures.
+# Their diagnoses and corrections remain documented in BUILD_LOG.md.
+blender/**/runtime/baselines/
+blender/**/renders/failed-review-setup/

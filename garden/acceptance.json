@@ -1,0 +1,123 @@
+{
+  "schema": "shahaf.acceptance.v1",
+  "profile": "locally-authored animated garden",
+  "scope": "Cinematic and interactive walking browser modes, with the original film preserved.",
+  "localAcceptance": "passed",
+  "checks": {
+    "originalFilmPreserved": true,
+    "originalMusicPreserved": true,
+    "futureHomeFramedAsHope": true,
+    "cinematicChapters": 7,
+    "cinematicDuration": 112,
+    "fullNaturalPlaybackCompleted": true,
+    "keyboardAndTouchWalking": true,
+    "handContact": true,
+    "lookAtCompanion": true,
+    "distinctStopResponses": true,
+    "longerPauseInvitation": true,
+    "chimesRespectMute": true,
+    "cafeMovementLockAndSeating": true,
+    "pauseAndInputReset": true,
+    "touchCancel": true,
+    "endingOrbit": true,
+    "replayReset": true,
+    "switchExperiences": true,
+    "offlinePersonalizedFile": true,
+    "offlineHttpRequests": 0,
+    "escapedNames": true,
+    "reducedMotion": true,
+    "inlineCodeBytePreservation": true,
+    "embeddedModelAndMusicBytes": true,
+    "browserErrors": 0,
+    "webglErrors": 0
+  },
+  "evidence": {
+    "tests": [
+      "scripts/verify_garden.py",
+      "garden/qa/playthrough.cjs",
+      "garden/qa/interactions.cjs",
+      "garden/qa/touch.cjs",
+      "garden/qa/layouts.cjs"
+    ],
+    "viewports": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        375,
+        667
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "naturalPlaybackElapsedSeconds": 115.003,
+    "naturalPlaybackStoryEnd": 112,
+    "emulatedPortraitLookFps": 29.2,
+    "stairContactSamples": 20,
+    "pausedExtraDraws": 0,
+    "maxCinematicModelTriangles": 496586,
+    "observedEndingModelTriangles": 495162,
+    "observedEndingSubmittedTriangles": 1010740,
+    "authoringAudit": "blender/shahaf-garden/geometry-audit.json",
+    "history": "BUILD_LOG.md"
+  },
+  "artifacts": [
+    {
+      "path": "somewhere-just-us.html",
+      "bytes": 3851478,
+      "sha256": "29dbe4d129e29c5f12915aa818cb58cb1666b1fc67e78d81e7834a3d8ab598d0"
+    },
+    {
+      "path": "assets/song.mp3",
+      "bytes": 2816985,
+      "sha256": "fc7e4dc46a2f43c86c6e39defec7aee6eab4fb5cb019c6581f30c1c6946a1017"
+    },
+    {
+      "path": "garden/index.html",
+      "bytes": 25257,
+      "sha256": "d5292c2224ec5d468d22bbc2615a6f369b4d30c89d2220e39c896794cf89c468"
+    },
+    {
+      "path": "garden/app.js",
+      "bytes": 996928,
+      "sha256": "40dbfc551ff93cd08a8b1e5c6928acc349591398472cd1372bdd074cdecb0d9b"
+    },
+    {
+      "path": "garden/standalone.html",
+      "bytes": 11304766,
+      "sha256": "37069ad4199162e398946f049807d2a2885a0c43e4c95798ab3597b8f1344da1"
+    },
+    {
+      "path": "garden/assets/garden.glb",
+      "bytes": 3764776,
+      "sha256": "6c31644f7aedd205846931554d200b87b0d57e8656021b6e6aec899755865690"
+    },
+    {
+      "path": "garden/assets/walking-cast.glb",
+      "bytes": 1088944,
+      "sha256": "d69b2d7ddde90e1647ac7288e32eeae77a85844ab680f71dfffcf59f4782d36c"
+    }
+  ],
+  "provenance": {
+    "geometry": "Authored locally by the primary agent in Blender",
+    "paidGenerationCredits": 0,
+    "externalModels": false,
+    "font": "Georgia Italic from the installed system; packed in the Blender file and converted to geometry for the browser"
+  },
+  "scopeLimits": [
+    "Phone viewports and touch were emulated on the test machine; physical-phone performance was not measured.",
+    "The editable Blender scene keeps authoring detail. The browser uses its optimized assets and renders the film in real time."
+  ],
+  "legacyRoomValidator": {
+    "applicable": false,
+    "reason": "Its Meshy pricing, generated-reference-image approval and fixed room-export requirements do not describe this zero-credit procedural animated scene. The diagnostic is retained without claiming it passed.",
+    "diagnostic": "blender/shahaf-garden/function-gate-diagnostic.txt"
+  }
+}
